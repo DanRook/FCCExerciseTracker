@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Exercise Tracker | freeCodeCamp</title>
+    <link href="style.css" rel="stylesheet"/>
+  </head>
+
+  <body>
+      <h1>Exercise tracker</h1>
+      <div class="container">
+      <form action="/api/users" method="post">
+        <h2>Create a New User</h2>
+        <p><code>POST /api/users</code></p>
+        <label for="uname"><input id="uname" type="text" name="username" placeholder="username" /></label>
+        <input type="submit" value="Submit" />
+      </form>
+      <form action="/api/users/:_id/exercises" id="exercise-form" method="post">
+        <h2>Add exercises</h2>
+        <p><code>POST /api/users/:_id/exercises</code></p>
+        <label for="uid"><input id="uid" type="text" name=":_id" placeholder=":_id" required/></label>
+        <label for="desc"><input id="desc" type="text" name="description" placeholder="description*" required/></label>
+        <label for="dur"><input id="dur" type="text" name="duration" placeholder="duration* (mins.)" required/></label>
+        <label for="date"><input id="date" type="text" name="date" placeholder="date (yyyy-mm-dd)" /></label>
+        <input type="submit" value="Submit" />
+      </form>
+      <p>
+        <p>GET user's exercise log: </p>
+        <code>GET /api/users/:_id/logs?[from][&amp;to][&amp;limit]</code>
+      </p>
+      <p>[ ] = optional</p>
+      <p>from, to = dates (yyyy-mm-dd); limit = number</p>
+    </div>
+    <script>
+      const exerciseForm = document.getElementById("exercise-form");
+
+      exerciseForm.addEventListener("submit", () => {
+        const userId = document.getElementById("uid").value;
+        exerciseForm.action = `/api/users/${userId}/exercises`;
+
+        exerciseForm.submit();
+      });
+    </script>
+  </body>
+</html>
